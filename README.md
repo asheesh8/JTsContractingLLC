@@ -35,11 +35,31 @@ directly with `file://` breaks the video and relative fetches.
 
 ## Deploy
 
-Drop the **`site/`** folder on any static host — Netlify, Vercel, Cloudflare Pages, S3,
-or the current WordPress host's public directory. Nothing to compile.
+The site lives in **`site/`**, not the repo root. Every host therefore needs pointing at that
+subfolder — this is the one thing that trips up a first deploy (a root-level deploy 404s,
+because there is no `index.html` at the root).
 
-- Netlify / Cloudflare Pages: set the publish directory to `site`, no build command.
-- Point the domain at it, and `404.html` is picked up automatically by both.
+**Vercel** — already handled by [`vercel.json`](vercel.json):
+
+```json
+{ "outputDirectory": "site" }
+```
+
+No build command, no framework. If a deploy still 404s, the project's **Root Directory** in
+Vercel → Settings → Build & Deployment is overriding it; either clear it, or set it to `site`
+and delete `outputDirectory` from `vercel.json` (don't set both).
+
+**Netlify / Cloudflare Pages** — publish directory `site`, build command empty.
+
+**Any other static host / the current WordPress box** — upload the *contents* of `site/` into
+the web root. All paths in the HTML are relative, so it works at any mount point.
+
+`404.html` is picked up automatically by Vercel, Netlify and Cloudflare Pages.
+
+> **Before pointing the real domain here:** `sitemap.xml`, `robots.txt` and every `canonical`
+> tag hardcode `https://www.jtscontractingvt.com`. They are correct for the live domain but
+> wrong while you're testing on a `*.vercel.app` preview URL — harmless for now, but don't
+> submit the sitemap to Search Console until the real domain is attached.
 
 ## Before it goes live — three things need a decision
 
