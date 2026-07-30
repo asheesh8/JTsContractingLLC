@@ -1,0 +1,20 @@
+# Scrape archive — original full-resolution photos and the old site's raw HTML.
+# Reference material only; nothing in site/ depends on it. Kept local on purpose.
+scrape/
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs / temp
+*.log
+.cache/
+tmp/
