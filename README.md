@@ -24,6 +24,8 @@ docs/design-blueprint.md  extracted brand DNA + design decisions
 > repo (kept local, not published). Everything `site/` needs is committed here — the WebP
 > derivatives were generated from those originals at 640/1280/1920 px.
 
+**Live:** https://j-ts-contracting-llc.vercel.app — static site, no environment variables. Vercel serves the `site/` folder (`vercel.json` → `outputDirectory`).
+
 ## Run it locally
 
 ```bash
